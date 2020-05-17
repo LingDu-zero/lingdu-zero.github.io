@@ -4,8 +4,8 @@
 
 # Site
 title: Road to Dream
-subtitle: 'Live, learn and play.'
-description: ''
+subtitle: 'Live, Learn and Play.'
+description: 'A blog to share ideas about anything, of course, games mainly.'
 keywords:
 author: LingDu
 language: zh-CN
@@ -102,3 +102,9 @@ deploy:
   repo: https://github.com/LingDu-zero/lingdu-zero.github.io.git
   branch: master
   message: Update Hexo Static Content
+  
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true

@@ -1,0 +1,186 @@
+social:
+  - name: GitHub
+    link: https://github.com/LingDu-zero
+    icon: icon-github-line
+    color: "#181717"
+  - name: E-Mail
+    link: mailto:290419811@qq.com
+    icon: icon-mail-line
+    color: "#8E71C1"
+  - name: 微博
+    link: https://weibo.com/lingduuzero
+    icon: icon-weibo-line
+    color: "#E6162D"
+  - name: 网易云音乐
+    link: https://music.163.com/#/user/home?id=79575561
+    icon: icon-netease-cloud-music-line
+    color: "#C10D0C"
+  - name: 哔哩哔哩动画
+    link: https://space.bilibili.com/189899152
+    icon: icon-bilibili-line
+    color: "#FF8EB3"
+  - name: 微信公众号
+    link: https://wx1.sbimg.cn/2020/05/17/qrcode.jpg
+    icon: icon-wechat-2-line
+    color: "#1AAD19"
+
+colors:
+  primary: "#9856A1"
+  # bg: "#F5F5F5"
+  selection_bg: "#DBE8D0" # 选取文字时的背景色
+  # 标签云中标签的起始色和结束色
+  # tag_start_color:
+  # tag_end_color:
+
+fireworks:
+  enable: true
+  colors:
+    - "251, 148, 104"
+    - "249, 180, 150"
+    - "248, 209, 209"
+
+cursor:
+  enable: true
+  default: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/pointer.cur
+  pointer: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur
+  text: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/text.cur
+
+# 标语动画
+banner:
+  enable: true
+  title: 零度の乐园
+  src: /js/ui/banner.js
+  cloud:
+    enable: true
+    color: "white"
+  go_down:
+    enable: true
+    icon: icon-arrow-down-s-line
+
+# 公告
+# notice:
+#  enable: true
+#  content: Live for fun, Learn for play.
+
+bg_image:
+  enable: true
+  url: https://wx2.sbimg.cn/2020/05/17/background-min.jpg
+  opacity: 0.8
+
+#sidebar
+avatar:
+  enable: true
+  url: https://wx1.sbimg.cn/2020/05/17/avatar.jpg
+  rounded: true
+  opacity: 1
+  mickey_mouse: true
+
+pages:
+  - name: 大佬集结地
+    url: /links/
+    icon: icon-genderless-line
+    color: dodgerblue
+
+menu:
+  home:
+    path: /
+    icon: icon-home-4-line
+  archives:
+    path: /archives/
+    icon: icon-archive-line
+  tags:
+    path: /tags/
+    icon: icon-price-tag-3-line
+  categories:
+    path: /categories/
+    icon: icon-folder-2-line
+    #custom:
+    #title: 文档
+    #path: https://yun.yunyoujun.cn
+    #icon: icon-settings-line
+
+footer:
+  since: 2020
+  icon:
+    name: icon-cloud-line
+    animated: true
+    color: "#9856A1"
+  powered:
+    enable: true
+  live_time:
+    enable: true
+    prefix: 本博客已萌萌哒地运行
+    suffix: (●'◡'●)
+    start_time: "2020-05-17T00:00:00"
+
+say:
+  enable: true
+  # api: /data/sentences.json
+  # api: https://cdn.jsdelivr.net/gh/ElpsyCN/say@gh-pages/sentences.json
+  api: https://cdn.jsdelivr.net/gh/LingDu-zero/say@test/sentences.json
+  src: /js/say.js
+  # https://developer.hitokoto.cn/sentence/
+  hitokoto:
+    enable: false
+    api: https://v1.hitokoto.cn
+
+wordcloud:
+  enable: true
+
+reward_settings:
+  enable: false
+  icon: icon-hand-coin-line
+  comment: I'm so cute. Please give me money.
+  
+valine:
+  enable: true
+  appId: Pnajuj8AVCnpjUJSXoPrHWC0-gzGzoHsz
+  appKey: 16IhzbRUvBsl4UEdd6R5f3ER
+  placeholder: Just go go # comment box placeholder
+  avatar: # gravatar style
+  meta:
+    - nick
+    - mail
+    - link
+  pageSize: 10 # pagination size
+  # lang: zh-CN
+  visitor: false
+  visitor_index: false
+  # highlight: true
+  # recordIP: false
+  # serverURLs:
+  # Emoji See: https://valine.js.org/emoji.html
+  # emojiCDN: //i0.hdslb.com/bfs/emote/
+  # emojiMaps:
+  #   tv_doge: 6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png
+  #   more...
+  # enableQQ: false
+  # requiredFields:
+  #   - nick
+  #   - mail
+
+busuanzi:
+  enable: false
+  site_uv: true
+  site_uv_icon: icon-user-line
+  site_pv: true
+  site_pv_icon: icon-eye-line
+  page_pv: true
+  page_pv_icon: icon-eye-line
+  
+symbols_count_time:
+  item_text_post: true
+  item_text_total: true
+  awl: 2
+  wpm: 250
+  
+post_edit:
+  enable: true
+  url: https://github.com/LingDu-zero/lingdu-zero.github.io/tree/hexo/source/
+
+post_meta:
+  item_text: false
+  created_at: true
+  updated_at: true
+  categories: true
+  tags: true
