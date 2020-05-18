@@ -25,5 +25,9 @@
     "hexo-server": "^1.0.0",
     "hexo-symbols-count-time": "^0.7.1",
     "hexo-tag-aplayer": "^3.0.4"
+  },
+  "devDependencies": {
+    "grunt": "^1.1.0",
+    "grunt-rewrite": "^1.0.1"
   }
 }

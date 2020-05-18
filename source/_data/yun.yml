@@ -175,7 +175,7 @@ symbols_count_time:
   wpm: 250
   
 post_edit:
-  enable: true
+  enable: false
   url: https://github.com/LingDu-zero/lingdu-zero.github.io/tree/hexo/source/
 
 post_meta:
@@ -184,3 +184,9 @@ post_meta:
   updated_at: true
   categories: true
   tags: true
+
+github_issues:
+  enable: true
+  username: LingDu-zero
+  repository: lingdu-zero.github.io
+  filters: is:issue
