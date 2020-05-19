@@ -117,7 +117,7 @@ say:
   enable: true
   # api: /data/sentences.json
   # api: https://cdn.jsdelivr.net/gh/ElpsyCN/say@gh-pages/sentences.json
-  api: https://cdn.jsdelivr.net/gh/LingDu-zero/say@test/sentences.json
+  api: https://cdn.jsdelivr.net/gh/LingDu-zero/say@master/sentences.json
   src: /js/say.js
   # https://developer.hitokoto.cn/sentence/
   hitokoto:

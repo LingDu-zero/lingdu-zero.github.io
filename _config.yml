@@ -45,8 +45,8 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
-  line_number: true
+  enable: false
+  line_number: false
   auto_detect: false
   tab_replace: ''
   wrap: true
@@ -108,3 +108,11 @@ symbols_count_time:
   time: true
   total_symbols: true
   total_time: true
+
+prism_plugin:
+  mode: preprocess # realtime/preprocess
+  theme: default
+  line_number: false # default false
+
+server:
+  compress: true
