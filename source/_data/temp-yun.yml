@@ -190,17 +190,3 @@ github_issues:
   username: LingDu-zero
   repository: lingdu-zero.github.io
   filters: is:issue
-
-tags:
-  Game: "#4fc08d"
-  Hexo: "#0E834D"
-  Nintendo: "#5298d1"
-  Node.js: "#026E00"
-  Git: "#F14E32"
-  React: "#61dafb"
-  Python: "#3776ab"
-  PHP: "#8892BF"
-  VS Code: "#0066B8"
-  JavaScript: "#F4DF4F"
-  TypeScript: "#317AC6"
-  Laravel: "#F4645F"

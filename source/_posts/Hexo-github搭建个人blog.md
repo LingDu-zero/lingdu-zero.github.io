@@ -219,16 +219,16 @@ git push origin hexo
 输入以下命令即可创建
 
 ```shell
-hexo new [layout] <title>
+hexo new [layout] xxxx
 ```
 
-`layout`默认post布局，采用Markdown语法。
+在这里`layout`默认post布局，采用Markdown语法。
 
 [Markdown指南](https://github.com/younghz/Markdown)
 
 ### 文章永久链接
 
-Hexo默认文章永久链接为`https://yoursite.com/yea/month/day/title`。
+Hexo默认文章永久链接为`https://yoursite.com/year/month/day/title`。
 
 详情可查看 [Hexo永久链接](https://hexo.io/zh-cn/docs/permalinks)
 
@@ -279,18 +279,18 @@ date: 2020-05-19 13:22:53
 author: 零度
 tags: 
 categories: 
-# 加入该行
-abbrlink: 9799c9c57b84aaea
+# 加入该行（添加时请删除@@和abbrlink之间的空格，这里为了避免被替代加了空格）
+abbrlink: @@ abbrlink
 ```
 
-回到主目录下，执行`grunt`命令，会自动根据文章内容进行hash取代`9799c9c57b84aaea`。
+回到主目录下，执行`grunt`命令，会自动根据文章内容进行hash取代`@@ abbrlink`。
 
 然后编辑主目录下`_config.yml`文件，找到`permalink`字段
 
 ```yaml
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://lingdu-zero.github.io
+url: https://yourname.github.io
 root: /
 permalink: # 修改为 posts/:abbrlink.html
 permalink_defaults:
