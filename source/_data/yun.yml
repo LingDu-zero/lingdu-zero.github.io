@@ -20,7 +20,7 @@ social:
     icon: icon-bilibili-line
     color: "#FF8EB3"
   - name: 微信公众号
-    link: https://wx1.sbimg.cn/2020/05/17/qrcode.jpg
+    link: https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/qrcode.jpg
     icon: icon-wechat-2-line
     color: "#1AAD19"
 
@@ -64,13 +64,13 @@ banner:
 
 bg_image:
   enable: true
-  url: https://wx2.sbimg.cn/2020/05/17/background-min.jpg
+  url: https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/background-min.jpg
   opacity: 0.8
 
 #sidebar
 avatar:
   enable: true
-  url: https://wx1.sbimg.cn/2020/05/17/avatar.jpg
+  url: https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/avatar.png
   rounded: true
   opacity: 1
   mickey_mouse: true
@@ -195,8 +195,8 @@ tags:
   Game: "#4fc08d"
   Hexo: "#0E834D"
   Nintendo: "#5298d1"
-  Node.js: "#026E00"
-  Git: "#F14E32"
+  Xbox: "#026E00"
+  PlayStation: "#F14E32"
   React: "#61dafb"
   Python: "#3776ab"
   PHP: "#8892BF"

@@ -7,14 +7,14 @@ description: 零度认识的大佬们
 comments: true
 links:
   - url: https://lingdu-zero.github.io
-    avatar: https://wx1.sbimg.cn/2020/05/17/avatar.jpg
+    avatar: https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/avatar.png
     name: 零度
     blog: 零度の乐园
     desc: Live, Learn and Play.
     color: "#FE9367"
     email:
   - url: https://njuwuyuxin.github.io
-    avatar: https://wx1.sbimg.cn/2020/05/17/wuyuxin.jpg
+    avatar: https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/wuyuxin.jpg
     name: 吴雨昕
     blog: Mind Walker
     desc: 热爱游戏开发 略懂前端技术
