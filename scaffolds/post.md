@@ -1,8 +1,9 @@
 ---
 title: {{ title }}
 date: {{ date }}
-author:
+author: 零度
 tags:
+	-
 categories:
 abbrlink:
 ---
