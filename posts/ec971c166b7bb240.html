@@ -1,0 +1,453 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#9856A1"><meta name="author" content="LingDu"><meta name="copyright" content="LingDu"><meta name="generator" content="Hexo 4.2.1"><meta name="theme" content="hexo-theme-yun"><meta name="description" content="突然有人约我玩不玩饥荒？ 突然有人要我搭个服务器？ “我家境贫寒，你能帮帮我嘛？” 只能翻翻阿里云，找到学生优惠，开搞。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="饥荒服务器搭建指南">
+<meta property="og:url" content="https://lingdu-zero.github.io/posts/ec971c166b7bb240.html">
+<meta property="og:site_name" content="Road to Dream">
+<meta property="og:description" content="突然有人约我玩不玩饥荒？ 突然有人要我搭个服务器？ “我家境贫寒，你能帮帮我嘛？” 只能翻翻阿里云，找到学生优惠，开搞。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-09T12:36:43.000Z">
+<meta property="article:modified_time" content="2020-06-08T23:55:42.000Z">
+<meta property="article:author" content="LingDu">
+<meta property="article:tag" content="Game">
+<meta property="article:tag" content="饥荒">
+<meta name="twitter:card" content="summary"><title>饥荒服务器搭建指南 | Road to Dream</title><link rel="shortcut icon" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#9856A1"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script id="yun-config">
+    window.CONFIG = {"root":"/","title":"零度の乐园","version":"0.7.1","anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://cdn.jsdelivr.net/gh/LingDu-zero/say@master/sentences.json"},"fireworks":{"colors":["251, 148, 104","249, 180, 150","248, 209, 209"]}};
+  </script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;family=Source+Code+Pro&amp;display=swap" media="none" onload="this.media='all'"><script src="//at.alicdn.com/t/font_1140697_4i778vmn3jg.js" async></script><div class="js-Pjax"></div><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle sidebar-toggle-fixed hty-icon-button"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><aside class="sidebar"><script defer src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/about/" title="LingDu"><img width="96" loading="lazy" src="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/avatar.png" alt="LingDu"></a><div class="site-author-name"><a href="/about/">LingDu</a></div><a class="site-name" href="/about/site.html">Road to Dream</a><sub class="site-subtitle">Live, Learn and Play.</sub><div class="site-desciption">A blog to share ideas about anything, of course, games mainly.</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item site-state-posts"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">5</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">2</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">7</span></a></div><a class="site-state-item hty-icon-button" href="https://yun.yunyoujun.cn" target="_blank" rel="noopener" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/LingDu-zero" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:290419811@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://weibo.com/lingduuzero" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=79575561" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/189899152" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/qrcode.jpg" title="微信公众号" target="_blank" style="color:#1AAD19"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-2-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="大佬集结地" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前期准备"><span class="toc-number">1.</span> <span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动并创建Overworld和Cave配置信息"><span class="toc-number">3.</span> <span class="toc-text">启动并创建Overworld和Cave配置信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取饥荒服务器token"><span class="toc-number">4.1.</span> <span class="toc-text">获取饥荒服务器token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地图文件配置"><span class="toc-number">4.2.</span> <span class="toc-text">地图文件配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通用文件配置"><span class="toc-number">4.3.</span> <span class="toc-text">通用文件配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地上、洞穴独立文件配置"><span class="toc-number">4.4.</span> <span class="toc-text">地上、洞穴独立文件配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mod下载配置"><span class="toc-number">4.5.</span> <span class="toc-text">Mod下载配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mod文件配置"><span class="toc-number">4.6.</span> <span class="toc-text">Mod文件配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动"><span class="toc-number">5.</span> <span class="toc-text">启动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装screen"><span class="toc-number">5.1.</span> <span class="toc-text">安装screen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重启服务"><span class="toc-number">5.2.</span> <span class="toc-text">重启服务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时更新"><span class="toc-number">6.</span> <span class="toc-text">定时更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭服务"><span class="toc-number">7.</span> <span class="toc-text">关闭服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">8.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://lingdu-zero.github.io/posts/ec971c166b7bb240.html"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="LingDu"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Road to Dream"></span><header class="post-header"><h1 class="post-title" itemprop="name headline" style="color: undefined">饥荒服务器搭建指南</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2020-06-09 20:36:43" itemprop="dateCreated datePublished" datetime="2020-06-09T20:36:43+08:00">2020-06-09</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">44k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-timer-line"></use></svg></span> <span title="阅读时长">1:28</span></span></span><div class="post-classify"><span class="post-category"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category" href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="text">环境搭建</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag" href="/tags/Game/" style="--text-color:#4fc08d"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Game</span></a><a class="tag" href="/tags/%E9%A5%A5%E8%8D%92/"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">饥荒</span></a></span></div><div class="post-author"><span class="author-name">零度</span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content post-markdown"><p>突然有人约我玩不玩饥荒？</p>
+<p>突然有人要我搭个服务器？</p>
+<p>“我家境贫寒，你能帮帮我嘛？”</p>
+<p>只能翻翻阿里云，找到学生优惠，开搞。</p>
+<a id="more"></a>
+
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><ul>
+<li>阿里云学生云服务器ECS（Ubuntu 16.04）</li>
+<li>一点Linux</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首先安装依赖，Ubuntu/Debian 64-Bit系统用户使用下述代码</p>
+<pre class=" language-shell"><code class="language-shell">dpkg --add-architecture i386
+apt-get update
+apt-get install lib32gcc1
+apt-get install lib32stdc++6
+apt-get install libcurl4-gnutls-dev:i386</code></pre>
+<p>接下来创建用户（避免使用root用户）</p>
+<p><code>adduser dst</code></p>
+<p>进入<code>dst</code>用户并下载SteamCMD</p>
+<pre class=" language-shell"><code class="language-shell">su - dst
+wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+tar -xvzf steamcmd_linux.tar.gz
+mkdir server_dst</code></pre>
+<p>下载完成后进行解压并安装饥荒（编号343050）</p>
+<pre><code>./steamcmd.sh
+login anonymous
+force_install_dir /home/dst/server_dst
+app_update 343050 validate
+quit</code></pre><h2 id="启动并创建Overworld和Cave配置信息"><a href="#启动并创建Overworld和Cave配置信息" class="headerlink" title="启动并创建Overworld和Cave配置信息"></a>启动并创建Overworld和Cave配置信息</h2><p>创建两个启动文件分别为<code>start.sh</code>和<code>start2.sh</code></p>
+<p>在<code>start.sh</code>中输入<code>./dontstarve_dedicated_server_nullrenderer -console -cluster MyDediServer -shard Master</code>作为地上世界启动文件</p>
+<p>在<code>start2.sh</code>中输入<code>./dontstarve_dedicated_server_nullrenderer -console -cluster MyDediServer -shard Caves</code>作为洞穴世界启动文件</p>
+<p>随后依次运行文件<code>sh start.sh</code></p>
+<p>并在看到<code>Your Server Will Not Start</code>后按<code>CTRL+C</code>停止服务</p>
+<p><code>start2.sh</code>同理</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="获取饥荒服务器token"><a href="#获取饥荒服务器token" class="headerlink" title="获取饥荒服务器token"></a>获取饥荒服务器token</h3><p>打开饥荒联机版，点击左下角的Account</p>
+<p>在页面中点击右上角——游戏</p>
+<p>点击饥荒联机服务器</p>
+<p>创建服务器token</p>
+<h3 id="地图文件配置"><a href="#地图文件配置" class="headerlink" title="地图文件配置"></a>地图文件配置</h3><p>创建文件并输入token</p>
+<pre class=" language-shell"><code class="language-shell">vi /home/dst/.klei/DoNotStarveTogether/MyDediServer/cluster_token.txt</code></pre>
+<p>在<code>/home/dst/.klei/DoNotStarveTogether/MyDediServer/Master/</code>文件夹下创建<code>worldgenoverride.lua</code>文件，并在文件中输入以下内容</p>
+<pre class=" language-lua"><code class="language-lua"><span class="token keyword">return</span> <span class="token punctuation">{</span>
+    override_enabled <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">,</span>
+    preset <span class="token operator">=</span> <span class="token string">"SURVIVAL_TOGETHER"</span><span class="token punctuation">,</span>       <span class="token comment" spellcheck="true">-- "SURVIVAL_TOGETHER", "MOD_MISSING", "SURVIVAL_TOGETHER_CLASSIC", "SURVIVAL_DEFAULT_PLUS", "COMPLETE_DARKNESS", "DST_CAVE", "DST_CAVE_PLUS"</span>
+    overrides <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">-- default is "never", "rare", "default", "often", "always"</span>
+
+        <span class="token comment" spellcheck="true">-- MISC</span>
+        task_set <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>           <span class="token comment" spellcheck="true">-- "classic", "default", "cave_default"</span>
+        start_location <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>     <span class="token comment" spellcheck="true">-- "caves", "default", "plus", "darkness"</span>
+        world_size <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>         <span class="token comment" spellcheck="true">-- "small", "medium", "default", "huge"</span>
+        branching <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>          <span class="token comment" spellcheck="true">-- "never", "least", "default", "most"</span>
+        loop <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>               <span class="token comment" spellcheck="true">-- "never", "default", "always"</span>
+        autumn <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>             <span class="token comment" spellcheck="true">-- "noseason", "veryshortseason", "shortseason", "default", "longseason", "verylongseason", "random"</span>
+        winter <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>             <span class="token comment" spellcheck="true">-- "noseason", "veryshortseason", "shortseason", "default", "longseason", "verylongseason", "random"</span>
+        spring <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>             <span class="token comment" spellcheck="true">-- "noseason", "veryshortseason", "shortseason", "default", "longseason", "verylongseason", "random"</span>
+        summer <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>             <span class="token comment" spellcheck="true">-- "noseason", "veryshortseason", "shortseason", "default", "longseason", "verylongseason", "random"</span>
+        season_start <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>       <span class="token comment" spellcheck="true">-- "default", "winter", "spring", "summer", "autumnorspring", "winterorsummer", "random"</span>
+        day <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>                <span class="token comment" spellcheck="true">-- "default", "longday", "longdusk", "longnight", "noday", "nodusk", "nonight", "onlyday", "onlydusk", "onlynight"</span>
+        weather <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        earthquakes <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        lightning <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        frograin <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        wildfires <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        touchstone <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        regrowth <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>           <span class="token comment" spellcheck="true">-- "veryslow", "slow", "default", "fast", "veryfast"</span>
+        cavelight <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>          <span class="token comment" spellcheck="true">-- "veryslow", "slow", "default", "fast", "veryfast"</span>
+        boons <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        prefabswaps_start <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">-- "classic", "default", "highly random"</span>
+        prefabswaps <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>        <span class="token comment" spellcheck="true">-- "none", "few", "default", "many", "max"</span>
+
+        <span class="token comment" spellcheck="true">-- RESOURCES</span>
+        flowers <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        grass <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        sapling <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        marshbush <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        tumbleweed <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        reeds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        trees <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        flint <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        rock <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        rock_ice <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        meteorspawner <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        meteorshowers <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        mushtree <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        fern <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        flower_cave <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        wormlights <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+
+        <span class="token comment" spellcheck="true">-- UNPREPARED</span>
+        berrybush <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        carrot <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        mushroom <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        cactus <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        banana <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        lichen <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+
+        <span class="token comment" spellcheck="true">-- ANIMALS</span>
+        rabbits <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        moles <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        butterfly <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        birds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        buzzard <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        catcoon <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        perd <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        pigs <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        lightninggoat <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        beefalo <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        beefaloheat <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        hunt <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        alternatehunt <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        penguins <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        cave_ponds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        ponds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        bees <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        angrybees <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        tallbirds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        slurper <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        bunnymen <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        slurtles <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        rocky <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        monkey <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+
+        <span class="token comment" spellcheck="true">-- MONSTERS</span>
+        spiders <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        cave_spiders <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        hounds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        houndmound <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        merm <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        tentacles <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        chess <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        lureplants <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        walrus <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        liefs <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        deciduousmonster <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        krampus <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        bearger <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        deerclops <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        goosemoose <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        dragonfly <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        bats <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        fissure <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        worms <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span></code></pre>
+<p>同理，在洞穴文件下<code>/home/dst/.klei/DoNotStarveTogether/MyDediServer/Caves/</code>也创建<code>worldgenoverride.lua</code>，并输入以下内容</p>
+<pre class=" language-lua"><code class="language-lua"><span class="token keyword">return</span> <span class="token punctuation">{</span>
+    override_enabled <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">,</span>
+    preset <span class="token operator">=</span> <span class="token string">"DST_CAVE"</span><span class="token punctuation">,</span>                 <span class="token comment" spellcheck="true">-- "SURVIVAL_TOGETHER", "MOD_MISSING", "SURVIVAL_TOGETHER_CLASSIC", "SURVIVAL_DEFAULT_PLUS", "COMPLETE_DARKNESS", "DST_CAVE", "DST_CAVE_PLUS"</span>
+    overrides <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">-- defalut is "never", "rare", "default", "often", "always"</span>
+
+        <span class="token comment" spellcheck="true">-- MISC</span>
+        task_set <span class="token operator">=</span> <span class="token string">"cave_default"</span><span class="token punctuation">,</span>       <span class="token comment" spellcheck="true">-- "classic", "default", "cave_default"</span>
+        start_location <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>      <span class="token comment" spellcheck="true">-- "caves", "default", "plus", "darkness"</span>
+        world_size <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>          <span class="token comment" spellcheck="true">-- "small", "medium", "default", "huge"</span>
+        branching <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>           <span class="token comment" spellcheck="true">-- "never", "least", "default", "most"</span>
+        loop <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>                <span class="token comment" spellcheck="true">-- "never", "default", "always"</span>
+        autumn <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>              <span class="token comment" spellcheck="true">-- "noseason", "veryshortseason", "shortseason", "default", "longseason", "verylongseason", "random"</span>
+        winter <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>              <span class="token comment" spellcheck="true">-- "noseason", "veryshortseason", "shortseason", "default", "longseason", "verylongseason", "random"</span>
+        spring <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>              <span class="token comment" spellcheck="true">-- "noseason", "veryshortseason", "shortseason", "default", "longseason", "verylongseason", "random"</span>
+        summer <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>              <span class="token comment" spellcheck="true">-- "noseason", "veryshortseason", "shortseason", "default", "longseason", "verylongseason", "random"</span>
+        season_start <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>        <span class="token comment" spellcheck="true">-- "default", "winter", "spring", "summer", "autumnorspring", "winterorsummer", "random"</span>
+        day <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>                 <span class="token comment" spellcheck="true">-- "default", "longday", "longdusk", "longnight", "noday", "nodusk", "nonight", "onlyday", "onlydusk", "onlynight"</span>
+        weather <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        earthquakes <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        lightning <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        frograin <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        wildfires <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        touchstone <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        regrowth <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>            <span class="token comment" spellcheck="true">-- "veryslow", "slow", "default", "fast", "veryfast"</span>
+        cavelight <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>           <span class="token comment" spellcheck="true">-- "veryslow", "slow", "default", "fast", "veryfast"</span>
+        boons <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        prefabswaps_start <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>   <span class="token comment" spellcheck="true">-- "classic", "default", "highly random"</span>
+        prefabswaps <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>         <span class="token comment" spellcheck="true">-- "none", "few", "default", "many", "max"</span>
+
+        <span class="token comment" spellcheck="true">-- RESOURCES</span>
+        flowers <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        grass <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        sapling <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        marshbush <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        tumbleweed <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        reeds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        trees <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        flint <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        rock <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        rock_ice <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        meteorspawner <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        meteorshowers <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        mushtree <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        fern <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        flower_cave <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        wormlights <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+
+        <span class="token comment" spellcheck="true">-- UNPREPARED</span>
+        berrybush <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        carrot <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        mushroom <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        cactus <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        banana <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        lichen <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+
+        <span class="token comment" spellcheck="true">-- ANIMALS</span>
+        rabbits <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        moles <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        butterfly <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        birds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        buzzard <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        catcoon <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        perd <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        pigs <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        lightninggoat <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        beefalo <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        beefaloheat <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        hunt <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        alternatehunt <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        penguins <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        cave_ponds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        ponds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        bees <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        angrybees <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        tallbirds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        slurper <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        bunnymen <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        slurtles <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        rocky <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        monkey <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+
+        <span class="token comment" spellcheck="true">-- MONSTERS</span>
+        spiders <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        cave_spiders <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        hounds <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        houndmound <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        merm <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        tentacles <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        chess <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        lureplants <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        walrus <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        liefs <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        deciduousmonster <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        krampus <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        bearger <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        deerclops <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        goosemoose <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        dragonfly <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        bats <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        fissure <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+        worms <span class="token operator">=</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="通用文件配置"><a href="#通用文件配置" class="headerlink" title="通用文件配置"></a>通用文件配置</h3><p>在<code>/home/dst/.klei/DoNotStarveTogether/MyDediServer/</code>文件夹下创建<code>cluster.ini</code>文件，并根据以下内容自行配置</p>
+<pre><code>[MISC]
+max_snapshots = 6                  # 最大快照数，决定了可回滚的天数
+console_enabled = true             # 是否开启控制台
+
+[SHARD]
+shard_enabled = true               # 服务器共享，要开启洞穴服务器的必须启用
+bind_ip = 127.0.0.1                # 服务器监听的地址，当所有实例都运行在同一台机器时，可填写 127.0.0.1，会被 server .ini 覆盖
+master_ip = 127.0.0.1              # master 服务器的 IP，针对非 master 服务器，若与 master 服务器运行在同一台机器时，可填写 127.0.0.1，会被 server.ini 覆盖
+master_port = 10888                # 监听 master 服务器的 UDP 端口，所有连接至 master 服务器的非 master 服务器必须相同
+cluster_key = dst                  # 连接密码，每台服务器必须相同，会被 server.ini 覆盖
+
+[STEAM]
+steam_group_only = false           # 只允许某 Steam 组的成员加入
+steam_group_id = 0                 # 指定某个 Steam 组，填写组 ID
+steam_group_admins = false         # 开启后，Steam 组的管理员拥有服务器的管理权限
+
+[NETWORK]
+offline_server = false             # 离线服务器，只有局域网用户能加入，并且所有依赖于 Steam 的任何功能都无效，比如说饰品掉落
+tick_rate = 15                     # 每秒通信次数，越高游戏体验越好，但是会加大服务器负担
+whitelist_slots = 0                # 为白名单用户保留的游戏位
+cluster_password =                 # 游戏密码，不设置表示无密码
+cluster_name = ttionya test        # 游戏房间名称
+cluster_description = description  # 游戏房间描述
+lan_only_cluster = false           # 局域网游戏
+cluster_intention = madness        # 游戏偏好，可选 cooperative, competitive, social, or madness，随便设置，没卵用
+
+[GAMEPLAY]
+max_players = 16                   # 最大游戏人数
+pvp = true                         # 能不能攻击其他玩家，能不能给其他玩家喂屎
+game_mode = survival               # 游戏模式，可选 survival, endless or wilderness，与玩家死亡后的负面影响有关
+pause_when_empty = false           # 没人服务器暂停，刷天数必备
+vote_kick_enabled = false          # 投票踢人</code></pre><h3 id="地上、洞穴独立文件配置"><a href="#地上、洞穴独立文件配置" class="headerlink" title="地上、洞穴独立文件配置"></a>地上、洞穴独立文件配置</h3><pre><code>[SHARD]
+is_master = true /false      # 是否是 master 服务器，只能存在一个 true，其他全是 false
+name = caves                 # 针对非 master 服务器的名称
+id = ???                     # 随机生成，不用加入该属性
+
+[STEAM]
+authentication_port = 8766   # Steam 用的端口，确保每个实例都不相同
+master_server_port = 27016   # Steam 用的端口，确保每个实例都不相同
+
+[NETWORK]
+server_port = 10999          # 监听的 UDP 端口，只能介于 10998 - 11018 之间，确保每个实例都不相同</code></pre><p>在<code>/home/dst/.klei/DoNotStarveTogether/MyDediServer/Master/</code>文件夹下修改<code>server.ini</code></p>
+<pre><code>[SHARD]
+is_master = true
+
+[STEAM]
+authentication_port = 12345
+master_server_port = 12346
+
+[NETWORK]
+server_port = 10999</code></pre><p>在<code>/home/dst/.klei/DoNotStarveTogether/MyDediServer/Caves/</code>文件夹下修改<code>server.ini</code></p>
+<pre><code>[SHARD]
+is_master = false
+name = caves
+
+[STEAM]
+authentication_port = 12347
+master_server_port = 12348
+
+[NETWORK]
+server_port = 11000</code></pre><h3 id="Mod下载配置"><a href="#Mod下载配置" class="headerlink" title="Mod下载配置"></a>Mod下载配置</h3><p>编辑<code>/home/dst/server_dst/mods/dedicated_server_mods_setup.lua</code>文件</p>
+<p>去steam创意工坊寻找所需的Mod，并记录Mod的id添加到文件中</p>
+<pre class=" language-lua"><code class="language-lua"><span class="token function">ServerModSetup</span><span class="token punctuation">(</span><span class="token string">"458940297"</span><span class="token punctuation">)</span>
+<span class="token function">ServerModSetup</span><span class="token punctuation">(</span><span class="token string">"375859599"</span><span class="token punctuation">)</span> 
+<span class="token comment" spellcheck="true">--ServerModCollectionSetup("id")</span></code></pre>
+<h3 id="Mod文件配置"><a href="#Mod文件配置" class="headerlink" title="Mod文件配置"></a>Mod文件配置</h3><p>创建<code>modoverrides.lua</code>，并输入以下内容</p>
+<pre class=" language-lua"><code class="language-lua"><span class="token keyword">return</span> <span class="token punctuation">{</span>
+<span class="token punctuation">[</span><span class="token string">"workshop-458940297"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> enabled <span class="token operator">=</span> <span class="token keyword">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">[</span><span class="token string">"workshop-375859599"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> enabled <span class="token operator">=</span> <span class="token keyword">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">[</span><span class="token string">"workshop-444438334"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> enabled <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">,</span>
+    configuration_options <span class="token operator">=</span>
+    <span class="token punctuation">{</span>
+        keybind <span class="token operator">=</span> <span class="token number">103</span><span class="token punctuation">,</span>
+        maxLights <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        backpackCategory <span class="token operator">=</span> <span class="token string">"food"</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>其中<code>configuration_options</code>需要根据自身需求去填写（不建议在此配置，可以去<code>/home/dst/server_dst/mods/</code>文件夹下找到对应mod的<code>workshop-id</code>下的<code>modinfo.lua</code>配置）</p>
+<p>配置完成后将文件复制到<code>Master</code>和<code>Caves</code>文件夹下</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><h3 id="安装screen"><a href="#安装screen" class="headerlink" title="安装screen"></a>安装screen</h3><p>linux下还需要安装screen让你能够多窗口运行</p>
+<pre class=" language-shell"><code class="language-shell">exit # 返回root用户
+apt-get install screen</code></pre>
+<p>安装完后回到<code>dst</code>用户</p>
+<pre class=" language-shell"><code class="language-shell">su - dst</code></pre>
+<h3 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h3><p>由于采用screen作为多窗口运行的方式，我们还需要一个重启服务</p>
+<p>同样分为地上和洞穴</p>
+<p>在<code>/home/dst/server_dst/bin/</code>下创建<code>restart.sh</code>，并输入以下内容</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/sh</span>
+<span class="token comment" spellcheck="true"># launch of server Overworld</span>
+
+<span class="token comment" spellcheck="true">#Path Directory</span>
+name_folder<span class="token operator">=</span><span class="token string">"/home/dst/server_dst/bin"</span>
+
+<span class="token comment" spellcheck="true">#Command line</span>
+start_overworld<span class="token operator">=</span><span class="token string">"sh start.sh"</span>
+
+<span class="token comment" spellcheck="true">#Start or Restart the server</span>
+<span class="token function">screen</span> -dr dst_server1 -X -S quit
+<span class="token function">cd</span> <span class="token variable">${name_folder}</span>
+<span class="token function">screen</span> -dmS dst_server1 <span class="token variable">${start_overworld}</span></code></pre>
+<p>在<code>/home/dst/server_dst/bin/</code>下创建<code>restart2.sh</code>，并输入以下内容</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/sh</span>
+<span class="token comment" spellcheck="true"># launch of server Cave</span>
+
+<span class="token comment" spellcheck="true">#Path Directory</span>
+name_folder<span class="token operator">=</span><span class="token string">"/home/dst/server_dst/bin"</span>
+
+<span class="token comment" spellcheck="true">#Command line</span>
+start_cave<span class="token operator">=</span><span class="token string">"sh start2.sh"</span>
+
+<span class="token comment" spellcheck="true">#Start or Restart the server</span>
+<span class="token function">screen</span> -dr dst_server2 -X -S quit
+<span class="token function">cd</span> <span class="token variable">${name_folder}</span>
+<span class="token function">screen</span> -dmS dst_server2 <span class="token variable">${start_cave}</span></code></pre>
+<p>运行之后你可以用以下命令查看日志文档输出</p>
+<pre class=" language-shell"><code class="language-shell">tail -f /home/dst/.klei/DoNotStarveTogether/MyDediServer/Master/server_log.txt
+tail -f /home/dst/.klei/DoNotStarveTogether/MyDediServer/Caves/server_log.txt</code></pre>
+<h2 id="定时更新"><a href="#定时更新" class="headerlink" title="定时更新"></a>定时更新</h2><p>现在我们要设定每天定时更新文件</p>
+<p>在<code>/home/dst/server_dst/bin/</code>下创建<code>update.sh</code>文件，并输入以下内容</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#update of server</span>
+<span class="token function">screen</span> -dr dst_server1 -X quit
+<span class="token function">screen</span> -dr dst_server2 -X quit
+<span class="token function">cd</span> /home/dst
+./steamcmd.sh +login anonymous +force_install_dir /home/dst/server_dst +app_update 343050 validate +quit
+<span class="token function">sleep</span> 10
+sh /home/dst/server_dst/bin/restart.sh
+sh /home/dst/server_dst/bin/restart2.sh</code></pre>
+<p>可以运行检查一下，没有问题就可以进行下一步</p>
+<p>我们用crontab进行计划服务</p>
+<p>输入<code>crontab -e</code>，你能看到</p>
+<pre><code>Select an editor.  To change later, run &#39;select-editor&#39;.
+  1. /bin/ed
+  2. /bin/nano        &lt;---- easiest
+  3. /usr/bin/vim.basic
+  4. /usr/bin/vim.tiny</code></pre><p>选择2，将<code>0 6 * * * sh /home/dst/server_dst/bin/update.sh</code>复制到文件中，保存并退出</p>
+<h2 id="关闭服务"><a href="#关闭服务" class="headerlink" title="关闭服务"></a>关闭服务</h2><p>退回<code>root</code>用户，我们使用<code>htop</code>来完成这一任务</p>
+<pre><code>apt-get install htop
+su - dst
+htop -u dst</code></pre><p>随后在列表中找到相应的screen后台，按f9选择后删除</p>
+<p>若要再次打开，运行<code>restart.sh</code>和<code>restart2.sh</code>即可</p>
+<p>至此，设置基本结束</p>
+<p>还有一些黑名单、白名单等可以参考<a href="https://dontstarve.fandom.com/wiki/Guides/Don' target="_blank" rel="noopener"t_Starve_Together_Dedicated_Servers">饥荒官方指南</a>自行进行设置</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://developer.valvesoftware.com/wiki/SteamCMD#Linux" target="_blank" rel="noopener">V社SteamCMD安装指南</a></li>
+<li><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=590565473" target="_blank" rel="noopener">饥荒搭建指南</a>(需加速器)</li>
+<li><a href="https://dontstarve.fandom.com/wiki/Guides/Don' target="_blank" rel="noopener"t_Starve_Together_Dedicated_Servers">饥荒官方指南</a></li>
+<li><a href="http://blog.ttionya.com/article-1235.html" target="_blank" rel="noopener">饥荒联机独立服务器配置</a></li>
+</ol>
+</div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>零度</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://lingdu-zero.github.io/posts/ec971c166b7bb240.html" title="饥荒服务器搭建指南">https://lingdu-zero.github.io/posts/ec971c166b7bb240.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/b19f3666b73405a5.html" rel="next" title="再谈《集合啦！动物森友会》"><span class="post-nav-text">再谈《集合啦！动物森友会》</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div id="comment"><div class="comment-tooltip text-center"><span>点击按钮跳转 GitHub Issues 评论。</span><br><span>若没有本文 Issue，您可以使用 Comment 模版新建。</span><br><a class="hty-button hty-button--raised" id="github-issues" href="https://github.com/LingDu-zero/lingdu-zero.github.io/issues?q=is:issue+饥荒服务器搭建指南" target="_blank" rel="noopener">GitHub Issues</a></div><div class="comment-container" id="valine-container"></div><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script>function initValine() {
+  setTimeout(() => {
+    new Valine({
+      el: "#valine-container",
+      appId: 'Pnajuj8AVCnpjUJSXoPrHWC0-gzGzoHsz',
+      appKey: '16IhzbRUvBsl4UEdd6R5f3ER',
+      placeholder: 'Just go go',
+      path: window.location.pathname,
+      avatar: '',
+      meta: ["nick","mail","link"],
+      pageSize: 10,
+      lang: 'zh-cn',
+      visitor: false,
+      highlight: true,
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: null,
+      enableQQ: true,
+      requiredFields: [],
+    });
+  }, 1000);
+}
+initValine();</script></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2020 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> LingDu</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v4.2.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v0.7.1</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  window.setTimeout(blog_live_time, 1000);
+  const start = new Date('2020-05-17T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div></footer><a class="hty-icon-button" id="goUp" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#9856A1" stroke-width="2" stroke-linecap="round"></circle></svg></a></div><script defer src="/js/hexo-theme-yun.js"></script></body></html>
