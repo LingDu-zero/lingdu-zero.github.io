@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#9856A1"><meta name="author" content="LingDu"><meta name="copyright" content="LingDu"><meta name="generator" content="Hexo 4.2.1"><meta name="theme" content="hexo-theme-yun"><meta name="description" content="这里是对模糊逻辑的一个初步探索，用lua实现了简单的模糊逻辑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模糊逻辑">
+<meta property="og:url" content="https://lingdu-zero.github.io/posts/32bfd856e49525fazh.html">
+<meta property="og:site_name" content="Road to Dream">
+<meta property="og:description" content="这里是对模糊逻辑的一个初步探索，用lua实现了简单的模糊逻辑。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/%E9%9A%B6%E5%B1%9E%E5%87%BD%E6%95%B0%E7%A4%BA%E4%BE%8B.png">
+<meta property="og:image" content="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/%E9%99%90%E5%88%B6%E8%AF%8D%E4%BF%AE%E9%A5%B0.png">
+<meta property="og:image" content="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/MOM.png">
+<meta property="og:image" content="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/MaxAv.png">
+<meta property="og:image" content="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/%E6%9C%9F%E6%9C%9B%E5%80%BC.png">
+<meta property="og:image" content="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/%E8%B7%9D%E7%A6%BB.png">
+<meta property="og:image" content="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/%E5%AD%90%E5%BC%B9%E6%95%B0%E9%87%8F.png">
+<meta property="article:published_time" content="2021-11-28T16:14:52.000Z">
+<meta property="article:modified_time" content="2021-11-28T16:21:36.633Z">
+<meta property="article:author" content="LingDu">
+<meta property="article:tag" content="Game">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/%E9%9A%B6%E5%B1%9E%E5%87%BD%E6%95%B0%E7%A4%BA%E4%BE%8B.png"><title>模糊逻辑 | Road to Dream</title><link rel="shortcut icon" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#9856A1"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script id="yun-config">
+    window.CONFIG = {"root":"/","title":"零度の乐园","version":"0.7.1","anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://cdn.jsdelivr.net/gh/LingDu-zero/say@master/sentences.json"},"fireworks":{"colors":["251, 148, 104","249, 180, 150","248, 209, 209"]}};
+  </script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;family=Source+Code+Pro&amp;display=swap" media="none" onload="this.media='all'"><script src="//at.alicdn.com/t/font_1140697_4i778vmn3jg.js" async></script><div class="js-Pjax"></div><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle sidebar-toggle-fixed hty-icon-button"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><aside class="sidebar"><script defer src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/about/" title="LingDu"><img width="96" loading="lazy" src="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/avatar.png" alt="LingDu"></a><div class="site-author-name"><a href="/about/">LingDu</a></div><a class="site-name" href="/about/site.html">Road to Dream</a><sub class="site-subtitle">Live, Learn and Play.</sub><div class="site-desciption">A blog to share ideas about anything, of course, games mainly.</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item site-state-posts"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">13</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">4</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">15</span></a></div><a class="site-state-item hty-icon-button" href="https://yun.yunyoujun.cn" target="_blank" rel="noopener" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/LingDu-zero" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:290419811@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://weibo.com/lingduuzero" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=79575561" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/189899152" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/qrcode.jpg" title="微信公众号" target="_blank" style="color:#1AAD19"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-2-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="大佬集结地" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念"><span class="toc-number">1.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程"><span class="toc-number">1.2.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#普通集合"><span class="toc-number">1.3.</span> <span class="toc-text">普通集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模糊集合"><span class="toc-number">1.4.</span> <span class="toc-text">模糊集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#隶属函数"><span class="toc-number">1.4.1.</span> <span class="toc-text">隶属函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模糊集合运算符"><span class="toc-number">1.4.2.</span> <span class="toc-text">模糊集合运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制词"><span class="toc-number">1.4.3.</span> <span class="toc-text">限制词</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模糊语言变量"><span class="toc-number">1.5.</span> <span class="toc-text">模糊语言变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模糊规则"><span class="toc-number">1.6.</span> <span class="toc-text">模糊规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#去模糊化"><span class="toc-number">1.7.</span> <span class="toc-text">去模糊化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最大值均值（MOM）"><span class="toc-number">1.7.1.</span> <span class="toc-text">最大值均值（MOM）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中心法"><span class="toc-number">1.7.2.</span> <span class="toc-text">中心法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最大值平均（MaxAv）"><span class="toc-number">1.7.3.</span> <span class="toc-text">最大值平均（MaxAv）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#示例"><span class="toc-number">2.</span> <span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#模糊语言变量设计"><span class="toc-number">2.1.</span> <span class="toc-text">模糊语言变量设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#期望值模糊语言变量"><span class="toc-number">2.1.1.</span> <span class="toc-text">期望值模糊语言变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#目标距离模糊语言变量"><span class="toc-number">2.1.2.</span> <span class="toc-text">目标距离模糊语言变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子弹数量模糊语言变量"><span class="toc-number">2.1.3.</span> <span class="toc-text">子弹数量模糊语言变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模糊推理系统设计"><span class="toc-number">2.2.</span> <span class="toc-text">模糊推理系统设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算过程"><span class="toc-number">2.3.</span> <span class="toc-text">计算过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#去模糊化-1"><span class="toc-number">2.4.</span> <span class="toc-text">去模糊化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最大值均值"><span class="toc-number">2.4.1.</span> <span class="toc-text">最大值均值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最大值平均"><span class="toc-number">2.4.2.</span> <span class="toc-text">最大值平均</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中心法-1"><span class="toc-number">2.4.3.</span> <span class="toc-text">中心法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事后"><span class="toc-number">2.5.</span> <span class="toc-text">事后</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用指南"><span class="toc-number">3.</span> <span class="toc-text">使用指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#导入必要的包"><span class="toc-number">3.1.</span> <span class="toc-text">导入必要的包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个模糊逻辑类"><span class="toc-number">3.2.</span> <span class="toc-text">创建一个模糊逻辑类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立模糊语言变量"><span class="toc-number">3.3.</span> <span class="toc-text">建立模糊语言变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立成员集合"><span class="toc-number">3.4.</span> <span class="toc-text">建立成员集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加规则"><span class="toc-number">3.5.</span> <span class="toc-text">添加规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算具体的值"><span class="toc-number">3.6.</span> <span class="toc-text">计算具体的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意事项"><span class="toc-number">3.7.</span> <span class="toc-text">注意事项</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://lingdu-zero.github.io/posts/32bfd856e49525fazh.html"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="LingDu"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Road to Dream"></span><header class="post-header"><h1 class="post-title" itemprop="name headline" style="color: undefined">模糊逻辑</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2021-11-29 00:14:52" itemprop="dateCreated datePublished" datetime="2021-11-29T00:14:52+08:00">2021-11-29</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">14k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-timer-line"></use></svg></span> <span title="阅读时长">29 分钟</span></span></span><div class="post-classify"><span class="post-category"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category" href="/categories/GameMaker/" itemprop="url" rel="index"><span itemprop="text">GameMaker</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag" href="/tags/Game/" style="--text-color:#4fc08d"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Game</span></a><a class="tag" href="/tags/AI/"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">AI</span></a></span></div><div class="post-author"><span class="author-name">零度</span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content post-markdown"><p>这里是对模糊逻辑的一个初步探索，用lua实现了简单的模糊逻辑。</p>
+<a id="more"></a>
+
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>使电脑以一种类似人的方法去推理语言术语和规则。比如“远”、“近”、“刚好”、”适量”等概念。</p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ol>
+<li>建立模糊语言变量</li>
+<li>建立模糊推理系统</li>
+<li>根据模糊语言变量模糊化</li>
+<li>根据模糊规则计算后果的置信度</li>
+<li>去模糊</li>
+</ol>
+<h2 id="普通集合"><a href="#普通集合" class="headerlink" title="普通集合"></a>普通集合</h2><p>普通集合就不说了，只要知道普通集合是具有确定性的即可。</p>
+<h2 id="模糊集合"><a href="#模糊集合" class="headerlink" title="模糊集合"></a>模糊集合</h2><p>模糊集合和普通集合不一样的是，对于同一个数值，它可能具有不同的状态。例如一个人的智商是100，那觉得他是正常人的人群约占80%，觉得他是聪明人的人群约占20%。模糊集合便能做到这一点，因此能够描述人类语言中不确定的词语。</p>
+<h3 id="隶属函数"><a href="#隶属函数" class="headerlink" title="隶属函数"></a>隶属函数</h3><p>模糊集合通过一个隶属函数来定义，这些函数可以是任意形状的，如下图所示。</p>
+<img src="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/隶属函数示例.png" style="zoom:20%;" / loading="lazy">
+
+<p>简单来说，隶属函数就是能使一个值部分地隶属于某个集合。就好像图中竖线那个值一部分属于集合C，一部分属于集合B。</p>
+<p>对于隶属函数的描述，可以采用三个特殊点的方式（见下文示例一看便知）。此方法足以描述左肩函数、右肩函数和三角函数，但对于梯形函数需要四个特殊点。</p>
+<p>隶属函数的数学符号一般可写为<br>$$<br>F_{Name_Of_Set}(x)<br>$$</p>
+<h3 id="模糊集合运算符"><a href="#模糊集合运算符" class="headerlink" title="模糊集合运算符"></a>模糊集合运算符</h3><p>与运算（交集）<br>$$<br>F_{A\cap B}(x)=min{F_{A}(x), F_{B}(x)}<br>$$<br>或运算（并集）<br>$$<br>F_{A\cup B}(x)=max{F_{A}(x), F_{B}(x)}<br>$$<br>补集<br>$$<br>F_{A}(x)^{‘}=1-F_{A}(x)<br>$$</p>
+<h3 id="限制词"><a href="#限制词" class="headerlink" title="限制词"></a>限制词</h3><p>很多时候我们会说一些修饰词，比如非常。这一类词语可以略微缩小和扩大隶属度的范围，也就是让标准更宽松或者更严格。</p>
+<img src="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/限制词修饰.png" style="zoom:20%;" / loading="lazy">
+
+<p>一般来说，更严格地情况可以用平方函数，更宽松的情况可以开根号。</p>
+<h2 id="模糊语言变量"><a href="#模糊语言变量" class="headerlink" title="模糊语言变量"></a>模糊语言变量</h2><p>模糊语言变量是由一个或多个模糊集合的合成，它定量地表示一种概念或一种域。比如<br>$$<br>速度={慢， 中等， 快}<br>$$<br>也就是说，我们要为一个模糊语言变量创建一个或数个隶属函数。比如在“速度”这个语言变量下，我要创建“慢”、“中等”、“快”三个隶属函数。至于怎么定义慢，那根据应用背景，每个人都会有自己的理解。</p>
+<h2 id="模糊规则"><a href="#模糊规则" class="headerlink" title="模糊规则"></a>模糊规则</h2><p>在有了模糊语言变量之后，接下来便是规则。规则可以用前因后果这样的形式来描述：</p>
+<p>如果 <em>前提</em> 那么 <em>后果</em></p>
+<p>这种形式很适合代码直观理解。</p>
+<p>多个模糊规则的建立就形成了一个模糊推理系统。根据已建立的模糊推理系统，最终我们会得到一个和<em>后果</em>相关的模糊语言变量合集。此时我们需要通过去模糊化的操作让该语言变量返回一个确定的值以供比较。</p>
+<h2 id="去模糊化"><a href="#去模糊化" class="headerlink" title="去模糊化"></a>去模糊化</h2><p>去模糊化方法很多，但我只知道这几种。</p>
+<h3 id="最大值均值（MOM）"><a href="#最大值均值（MOM）" class="headerlink" title="最大值均值（MOM）"></a>最大值均值（MOM）</h3><p>计算具有最高置信度的输出值的平均值。</p>
+<img src="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/MOM.png" style="zoom:20%;" / loading="lazy">
+
+<p>这种情况完全不考虑置信度低的集合，所以很多时候并不准确。</p>
+<h3 id="中心法"><a href="#中心法" class="headerlink" title="中心法"></a>中心法</h3><p>确定输出集合整体的中心。图就不放了。可以想象成在杠杆上寻找重心的过程。那么寻找中心就得进行离散取样，计算中心的公式如下。<br>$$<br>Center=\frac{\sum_{s=min}^{max}s*DOM(s)}{\sum_{s=min}^{max}DOM(s)}<br>$$</p>
+<h3 id="最大值平均（MaxAv）"><a href="#最大值平均（MaxAv）" class="headerlink" title="最大值平均（MaxAv）"></a>最大值平均（MaxAv）</h3><p>对于每一个隶属函数，它都会有一个最大值。对于三角形函数来说，这个地方就是它的隶属值最大处；对于有平台的函数来说，这个地方就是隶属值最大的平台的中点。这个值就是代表这个隶属函数的值。</p>
+<img src="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/MaxAv.png" style="zoom:20%;" / loading="lazy">
+
+<p>图中A、B、C分别代表各自隶属函数的最大值（这里需要注意的是，并不是修剪之后的平均）。然后再对这三个隶属函数的置信度取加权平均即可。</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>此处用一个武器选择作为示例。假定武器是中距离武器，发射间隔较长。</p>
+<h2 id="模糊语言变量设计"><a href="#模糊语言变量设计" class="headerlink" title="模糊语言变量设计"></a>模糊语言变量设计</h2><p>这里简单地使用AI距离目标距离和携有子弹数量来判断武器的选择。武器的选择可以用一个期望值来确定。</p>
+<h3 id="期望值模糊语言变量"><a href="#期望值模糊语言变量" class="headerlink" title="期望值模糊语言变量"></a>期望值模糊语言变量</h3><p>使用三个隶属函数代表“不期望”、“期望”和“非常期望”。</p>
+<img src="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/期望值.png" style="zoom:25%;" / loading="lazy">
+
+<p>具体参数为：</p>
+<ol>
+<li>不期望：左肩函数（0，25，50）</li>
+<li>期望：三角函数（25，50，75）</li>
+<li>非常期望：右肩函数（50，75，100）</li>
+</ol>
+<h3 id="目标距离模糊语言变量"><a href="#目标距离模糊语言变量" class="headerlink" title="目标距离模糊语言变量"></a>目标距离模糊语言变量</h3><p>同样使用三个隶属函数表示近中远。</p>
+<img src="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/距离.png" style="zoom:25%;" / loading="lazy">
+
+<p>具体参数为：</p>
+<ol>
+<li>近：左肩函数（0，25，150）</li>
+<li>中：三角函数（25，150，300）</li>
+<li>远：右肩函数（150，300，400）</li>
+</ol>
+<h3 id="子弹数量模糊语言变量"><a href="#子弹数量模糊语言变量" class="headerlink" title="子弹数量模糊语言变量"></a>子弹数量模糊语言变量</h3><p>同样使用三个隶属函数表示少、合适和多。</p>
+<img src="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/子弹数量.png" style="zoom:25%;" / loading="lazy">
+
+<p>具体参数为：</p>
+<ol>
+<li>低：左肩函数（0，0，10）</li>
+<li>合适：三角函数（0，10，30）</li>
+<li>多：右肩函数（10，30，40）</li>
+</ol>
+<h2 id="模糊推理系统设计"><a href="#模糊推理系统设计" class="headerlink" title="模糊推理系统设计"></a>模糊推理系统设计</h2><p>模糊推理系统的设计实际是根据经验设计相应的规则。因为我们使用的是中距离武器，所以我们倾向于中等距离使用它。由于发射间隔较长，所以子弹数少一些也能接受。</p>
+<p>规则集如下：</p>
+<ol>
+<li>如果<strong><em>远距离</em></strong>与<strong><em>子弹多</em></strong>，那么<strong><em>期望</em></strong></li>
+<li>如果<strong><em>远距离</em></strong>与<strong><em>子弹中等</em></strong>，那么<strong><em>不期望</em></strong></li>
+<li>如果<strong><em>远距离</em></strong>与<strong><em>子弹少</em></strong>，那么<strong><em>不期望</em></strong></li>
+<li>如果<strong><em>中等距离</em></strong>与<strong><em>子弹多</em></strong>，那么<strong><em>非常期望</em></strong></li>
+<li>如果<strong><em>中等距离</em></strong>与<strong><em>子弹中等</em></strong>，那么<strong><em>非常期望</em></strong></li>
+<li>如果<strong><em>中等距离</em></strong>与<strong><em>子弹少</em></strong>，那么<strong><em>期望</em></strong></li>
+<li>如果<strong><em>近距离</em></strong>与<strong><em>子弹多</em></strong>，那么<strong><em>不期望</em></strong></li>
+<li>如果<strong><em>近距离</em></strong>与<strong><em>子弹中等</em></strong>，那么<strong><em>不期望</em></strong></li>
+<li>如果<strong><em>近距离</em></strong>与<strong><em>子弹少</em></strong>，那么<strong><em>不期望</em></strong></li>
+</ol>
+<p>自此，我们便完成了模糊推理系统的建设。下面我们就代入一个具体的值看下整个计算过程。</p>
+<h2 id="计算过程"><a href="#计算过程" class="headerlink" title="计算过程"></a>计算过程</h2><p>假定目标距离为200，子弹数目是8。下列一条对应一个相应的规则。</p>
+<ol>
+<li>远距离：0.33，子弹多：0，期望：0（对于远距离和子弹多，子弹数目为8时，子弹多的隶属度为0。因为与运算，期望的置信度一定为0。）</li>
+<li>远距离：0.33，子弹中等：0.8，不期望：0.33</li>
+<li>远距离：0.33，子弹少：0.2，不期望：0.2</li>
+<li>中等距离：0.67，子弹多：0，非常期望：0</li>
+<li>中等距离：0.67，子弹中等：0.8，非常期望：0.67</li>
+<li>中等距离：0.67，子弹少：0.2，期望：0.2</li>
+<li>近距离：0，子弹数：**，不期望：0（8，9同）</li>
+</ol>
+<p>此时可以得到模糊联想矩阵。</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">近距离</th>
+<th align="center">中等距离</th>
+<th align="center">远距离</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">子弹少</td>
+<td align="center">不期望（0）</td>
+<td align="center"><strong>期望（0.2）</strong></td>
+<td align="center"><strong>不期望（0.2）</strong></td>
+</tr>
+<tr>
+<td align="center">子弹中等</td>
+<td align="center">不期望（0）</td>
+<td align="center"><strong>非常期望（0.67）</strong></td>
+<td align="center"><strong>不期望（0.33）</strong></td>
+</tr>
+<tr>
+<td align="center">子弹多</td>
+<td align="center">不期望（0）</td>
+<td align="center">非常期望（0）</td>
+<td align="center">期望（0）</td>
+</tr>
+</tbody></table>
+<p>从结果中可以发现，每一种期望值隶属函数都有多个置信度。处理多个置信度同样有不同的方法，常见的就两种。一是有界限的求和，二是最大值。此处就用最大值来处理，这样我们就能得到一个结论。</p>
+<table>
+<thead>
+<tr>
+<th align="center">结论</th>
+<th align="center">置信度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">不期望</td>
+<td align="center">0.33</td>
+</tr>
+<tr>
+<td align="center">期望</td>
+<td align="center">0.2</td>
+</tr>
+<tr>
+<td align="center">非常期望</td>
+<td align="center">0.67</td>
+</tr>
+</tbody></table>
+<p>这其实相当于对原有的期望值模糊语言变量进行修剪的过程。在去模糊化（下一步就是去模糊化）的过程中，高于置信度的将会被限制为置信度，低于置信度的仍保持不变。</p>
+<h2 id="去模糊化-1"><a href="#去模糊化-1" class="headerlink" title="去模糊化"></a>去模糊化</h2><p>现在我们来整理一下已知的内容，首先是结论（如上表所示），其次是期望值的模糊语言变量，具体参数为：</p>
+<ol>
+<li>不期望：左肩函数（0，25，50）– 12.5</li>
+<li>期望：三角函数（25，50，75）– 50</li>
+<li>非常期望：右肩函数（50，75，100）– 87.5</li>
+</ol>
+<p>最后添加的数值为最大值平均用到的代表值。</p>
+<h3 id="最大值均值"><a href="#最大值均值" class="headerlink" title="最大值均值"></a>最大值均值</h3><p>很明显，结果为5/6*100≈83.33。</p>
+<h3 id="最大值平均"><a href="#最大值平均" class="headerlink" title="最大值平均"></a>最大值平均</h3><p>$$<br>\frac{12.5<em>\frac{1}{3}+50</em>0.2+87.5*\frac{2}{3}}{\frac{1}{3}+0.2+\frac{2}{3}}=\frac{217.5}{3.6}≈60.42<br>$$</p>
+<h3 id="中心法-1"><a href="#中心法-1" class="headerlink" title="中心法"></a>中心法</h3><p>中心法则采用离散取值的办法，在采样点为10时可以求出结果为62。</p>
+<h2 id="事后"><a href="#事后" class="headerlink" title="事后"></a>事后</h2><p>自此我们就给出了当前情况下选择该武器的具体期望值。那么在实际运用中，可以计算多个武器的期望值来确定AI到底使用哪一把武器。</p>
+<p>那么除了这里，还有什么地方能用上模糊逻辑呢？</p>
+<h1 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h1><p>项目地址：<a href="https://github.com/LingDu-zero/FuzzyLogic" target="_blank" rel="noopener">https://github.com/LingDu-zero/FuzzyLogic</a></p>
+<h2 id="导入必要的包"><a href="#导入必要的包" class="headerlink" title="导入必要的包"></a>导入必要的包</h2><p>整个程序必须require的包只有一个，就是FuzzyModule。其它的例如FzAnd、FzOr、FzVery等操作数都是看需求导入。</p>
+<h2 id="创建一个模糊逻辑类"><a href="#创建一个模糊逻辑类" class="headerlink" title="创建一个模糊逻辑类"></a>创建一个模糊逻辑类</h2><pre class=" language-lua"><code class="language-lua">fm <span class="token operator">=</span> FuzzyModule<span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span>NumSamples<span class="token punctuation">,</span> Debug<span class="token punctuation">)</span></code></pre>
+<p>NumSamples参数默认为15，它是去模糊化过程中采用中心法的采样数目。</p>
+<p>Debug参数默认为false，为true时会输出模糊化后的DOM信息。</p>
+<h2 id="建立模糊语言变量"><a href="#建立模糊语言变量" class="headerlink" title="建立模糊语言变量"></a>建立模糊语言变量</h2><pre class=" language-lua"><code class="language-lua">DistToTarget <span class="token operator">=</span> fm<span class="token punctuation">:</span><span class="token function">CreateFLV</span><span class="token punctuation">(</span><span class="token string">"DistToTarget"</span><span class="token punctuation">)</span></code></pre>
+<p>这里的返回值是一个FuzzyVariableModule类。</p>
+<p>字符串参数用于表的存储，即table[name] = FuzzyVariableModule实例。</p>
+<h2 id="建立成员集合"><a href="#建立成员集合" class="headerlink" title="建立成员集合"></a>建立成员集合</h2><pre class=" language-lua"><code class="language-lua">Target_Close <span class="token operator">=</span> DistToTarget<span class="token punctuation">:</span><span class="token function">AddLeftShoulderSet</span><span class="token punctuation">(</span><span class="token string">"Target_Close"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">)</span>
+Target_Medium <span class="token operator">=</span> DistToTarget<span class="token punctuation">:</span><span class="token function">AddTriangularSet</span><span class="token punctuation">(</span><span class="token string">"Target_Medium"</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span>
+Target_Far <span class="token operator">=</span> DistToTarget<span class="token punctuation">:</span><span class="token function">AddRightShoulderSet</span><span class="token punctuation">(</span><span class="token string">"Target_Far"</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">)</span></code></pre>
+<p>建立成员集合主要通过AddxxxSet方法添加隶属函数，此处一共实现了四种隶属函数，分别是AddLeftShoulderSet、AddRightShoulderSet、AddTriangularSet和AddSingletonSet。如果要添加隶属函数，可自行在FuzzySet内添加，并在FuzzyVariableModule内实现添加方法。</p>
+<p>第一个字符串参数也是作为表的key，第二个参数表示最左边的值，第三个参数表示转折点，第三个参数表示最右边的值。详见前文对隶属函数的描述。</p>
+<p>此处会返回一个FzSet类实例。为什么要再做一层FzSet而不是返回FuzzySet呢？在原版c++里面FzSet是一个代理类，方便拷贝自身并传递，但是它又会作为一个操作数和FzAnd这些操作一起继承FuzzyTerm这个抽象基类，所以这里还是保留了。（但是抽象类在lua里面是不是没什么意义啊。。。）</p>
+<h2 id="添加规则"><a href="#添加规则" class="headerlink" title="添加规则"></a>添加规则</h2><pre class=" language-lua"><code class="language-lua">fm<span class="token punctuation">:</span><span class="token function">AddRule</span><span class="token punctuation">(</span><span class="token function">FzAnd</span><span class="token punctuation">(</span>Target_Close<span class="token punctuation">,</span> Ammo_Loads<span class="token punctuation">)</span><span class="token punctuation">,</span> UnDesirable<span class="token punctuation">)</span></code></pre>
+<p>添加规则需要调用FuzzyModule的AddRule函数，规则由因和果构成。第一个参数就代表因，第二参数就代表果，它们都是继承自FuzzyTerm类。</p>
+<h2 id="计算具体的值"><a href="#计算具体的值" class="headerlink" title="计算具体的值"></a>计算具体的值</h2><p>经过上面的操作，一个模糊逻辑就建立完毕了，下面就可以使用它了。</p>
+<pre class=" language-lua"><code class="language-lua"><span class="token keyword">function</span> <span class="token function">CalculateDesirability</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> dist<span class="token punctuation">,</span> ammo<span class="token punctuation">)</span>
+    f<span class="token punctuation">:</span><span class="token function">Fuzzify</span><span class="token punctuation">(</span><span class="token string">"DistToTarget"</span><span class="token punctuation">,</span> dist<span class="token punctuation">)</span>
+    f<span class="token punctuation">:</span><span class="token function">Fuzzify</span><span class="token punctuation">(</span><span class="token string">"AmmoStatus"</span><span class="token punctuation">,</span> ammo<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> f<span class="token punctuation">:</span><span class="token function">DeFuzzify</span><span class="token punctuation">(</span><span class="token string">"Desirability"</span><span class="token punctuation">,</span> f<span class="token punctuation">.</span>DefuzzifyType<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span></code></pre>
+<p>首先肯定要对相应的“因”进行模糊化，调用FuzzyModule的Fuzzify即可。这里的第一个字符串参数表示模糊语言变量，第二个参数表示具体的值。</p>
+<p>对所有的“因”模糊化之后就可以用DeFuzzify函数进行去模糊化。这里的第一个字符串参数表示模糊语言变量，第二个参数表示去模糊化方法。内置了两种去模糊化方法，DefuzzufyType[1]是最大值平均法（MaxAv），DefuzzufyType[2]是中心法。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>没有做各种异常处理。。。</li>
+<li>很不完善</li>
+</ol>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1]巴克兰. 游戏人工智能编程案例精粹[M]. 人民邮电出版社, 2012.</p>
+</div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>零度</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://lingdu-zero.github.io/posts/32bfd856e49525fazh.html" title="模糊逻辑">https://lingdu-zero.github.io/posts/32bfd856e49525fazh.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/76320a85e8ecffcc.html" rel="next" title="这个世界需要更多的英雄——《守望先锋》"><span class="post-nav-text">这个世界需要更多的英雄——《守望先锋》</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div id="comment"><div class="comment-tooltip text-center"><span>点击按钮跳转 GitHub Issues 评论。</span><br><span>若没有本文 Issue，您可以使用 Comment 模版新建。</span><br><a class="hty-button hty-button--raised" id="github-issues" href="https://github.com/LingDu-zero/lingdu-zero.github.io/issues?q=is:issue+模糊逻辑" target="_blank" rel="noopener">GitHub Issues</a></div><div class="comment-container" id="valine-container"></div><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script>function initValine() {
+  setTimeout(() => {
+    new Valine({
+      el: "#valine-container",
+      appId: 'Pnajuj8AVCnpjUJSXoPrHWC0-gzGzoHsz',
+      appKey: '16IhzbRUvBsl4UEdd6R5f3ER',
+      placeholder: 'Just go go',
+      path: window.location.pathname,
+      avatar: '',
+      meta: ["nick","mail","link"],
+      pageSize: 10,
+      lang: 'zh-cn',
+      visitor: false,
+      highlight: true,
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: null,
+      enableQQ: true,
+      requiredFields: [],
+    });
+  }, 1000);
+}
+initValine();</script></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2020 – 2021 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> LingDu</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v4.2.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v0.7.1</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  window.setTimeout(blog_live_time, 1000);
+  const start = new Date('2020-05-17T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div></footer><a class="hty-icon-button" id="goUp" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#9856A1" stroke-width="2" stroke-linecap="round"></circle></svg></a></div><script defer src="/js/hexo-theme-yun.js"></script></body></html>
