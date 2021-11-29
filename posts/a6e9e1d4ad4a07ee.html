@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#9856A1"><meta name="author" content="LingDu"><meta name="copyright" content="LingDu"><meta name="generator" content="Hexo 4.2.1"><meta name="theme" content="hexo-theme-yun"><meta name="description" content="介绍Combs Method在解决模糊逻辑中规则爆炸增长的问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模糊逻辑续篇——CombsMethod">
+<meta property="og:url" content="https://lingdu-zero.github.io/posts/a6e9e1d4ad4a07ee.html">
+<meta property="og:site_name" content="Road to Dream">
+<meta property="og:description" content="介绍Combs Method在解决模糊逻辑中规则爆炸增长的问题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-29T17:05:48.000Z">
+<meta property="article:modified_time" content="2021-11-29T17:07:49.965Z">
+<meta property="article:author" content="LingDu">
+<meta property="article:tag" content="Game">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary"><title>模糊逻辑续篇——CombsMethod | Road to Dream</title><link rel="shortcut icon" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#9856A1"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script id="yun-config">
+    window.CONFIG = {"root":"/","title":"零度の乐园","version":"0.7.1","anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://cdn.jsdelivr.net/gh/LingDu-zero/say@master/sentences.json"},"fireworks":{"colors":["251, 148, 104","249, 180, 150","248, 209, 209"]}};
+  </script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;family=Source+Code+Pro&amp;display=swap" media="none" onload="this.media='all'"><script src="//at.alicdn.com/t/font_1140697_4i778vmn3jg.js" async></script><div class="js-Pjax"></div><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle sidebar-toggle-fixed hty-icon-button"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><aside class="sidebar"><script defer src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/about/" title="LingDu"><img width="96" loading="lazy" src="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/avatar.png" alt="LingDu"></a><div class="site-author-name"><a href="/about/">LingDu</a></div><a class="site-name" href="/about/site.html">Road to Dream</a><sub class="site-subtitle">Live, Learn and Play.</sub><div class="site-desciption">A blog to share ideas about anything, of course, games mainly.</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item site-state-posts"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">14</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">4</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">15</span></a></div><a class="site-state-item hty-icon-button" href="https://yun.yunyoujun.cn" target="_blank" rel="noopener" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/LingDu-zero" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:290419811@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://weibo.com/lingduuzero" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=79575561" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/189899152" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://lingdu-picture.oss-cn-beijing.aliyuncs.com/img/qrcode.jpg" title="微信公众号" target="_blank" style="color:#1AAD19"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-2-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="大佬集结地" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#模糊逻辑的爆炸增长问题"><span class="toc-number">1.</span> <span class="toc-text">模糊逻辑的爆炸增长问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#等价关系"><span class="toc-number">2.</span> <span class="toc-text">等价关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URC如何作用于模糊推理系统"><span class="toc-number">3.</span> <span class="toc-text">URC如何作用于模糊推理系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#带权重的URC"><span class="toc-number">4.</span> <span class="toc-text">带权重的URC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#武器选择系统中URC与IRC的比较"><span class="toc-number">5.</span> <span class="toc-text">武器选择系统中URC与IRC的比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">6.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://lingdu-zero.github.io/posts/a6e9e1d4ad4a07ee.html"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="LingDu"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Road to Dream"></span><header class="post-header"><h1 class="post-title" itemprop="name headline" style="color: undefined">模糊逻辑续篇——CombsMethod</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2021-11-30 01:05:48" itemprop="dateCreated datePublished" datetime="2021-11-30T01:05:48+08:00">2021-11-30</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">7.8k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-timer-line"></use></svg></span> <span title="阅读时长">16 分钟</span></span></span><div class="post-classify"><span class="post-category"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category" href="/categories/GameMaker/" itemprop="url" rel="index"><span itemprop="text">GameMaker</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag" href="/tags/Game/" style="--text-color:#4fc08d"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Game</span></a><a class="tag" href="/tags/AI/"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">AI</span></a></span></div><div class="post-author"><span class="author-name">零度</span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content post-markdown"><p>介绍Combs Method在解决模糊逻辑中规则爆炸增长的问题。</p>
+<a id="more"></a>
+
+<h2 id="模糊逻辑的爆炸增长问题"><a href="#模糊逻辑的爆炸增长问题" class="headerlink" title="模糊逻辑的爆炸增长问题"></a>模糊逻辑的爆炸增长问题</h2><p>在前一篇文章所叙述的模糊推理系统中，仅仅拥有三个模糊语言变量，其中两个是条件，一个是结果，每种语言变量有三个成员，就产生了九种规则。显然，规则数目会随着规模的增大呈现出指数级增长。因此我们需要一种方法来减少规则产生的数目。</p>
+<p>让我们先看到之前的规则：</p>
+<p>if （<em>p</em> and <em>q</em>） then <em>r</em></p>
+<p>这个规则相当于 if w then r，其中w是p和q的交集。这样的规则我们称之为intersection rule configuration (IRC)。这种规则的弊端很明显，一是当p或q改变的时候，w必然会随之改变，这样就会产生一种新的规则关系；二是w和r的关系取决于我们定义p和q的精确度，当前提条件数量增加的时候，它们的交叉关系会不可避免地爆炸增长。</p>
+<p>假如能够把一个交集变成各自对r的关系，便能够极大的减少规则数量，使设定规则随着问题规模线性增长。</p>
+<h2 id="等价关系"><a href="#等价关系" class="headerlink" title="等价关系"></a>等价关系</h2><p>这里给出以下等价关系：<br>$$<br>((p\cap q)\Rightarrow r)\Leftrightarrow ((p\Rightarrow r) \cup (q\Rightarrow r))<br>$$</p>
+<p>$$<br>((p\cup q)\Rightarrow r)\Leftrightarrow ((p\Rightarrow r) \cap (q\Rightarrow r))<br>$$</p>
+<p>$$<br>(p\Rightarrow (r\cap s))\Leftrightarrow ((p\Rightarrow r) \cap (p\Rightarrow s))<br>$$</p>
+<p>$$<br>(p\Rightarrow (r\cup s))\Leftrightarrow ((p\Rightarrow r) \cup (p\Rightarrow s))<br>$$</p>
+<p>本文就以最常见的第一种等价关系作出解释。</p>
+<p>对于if p then r，它等价于not p or r。当p为真时，才会考虑r；当p为假时，表达式表现为真。为此我们可以列出真值表。</p>
+<table>
+<thead>
+<tr>
+<th align="center">p</th>
+<th align="center">not p</th>
+<th align="center">r</th>
+<th align="center">not p or r</th>
+<th align="center">if p then r</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">T</td>
+<td align="center">F</td>
+<td align="center">T</td>
+<td align="center">T</td>
+<td align="center">T</td>
+</tr>
+<tr>
+<td align="center">T</td>
+<td align="center">F</td>
+<td align="center">F</td>
+<td align="center">F</td>
+<td align="center">F</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td align="center">T</td>
+<td align="center">T</td>
+<td align="center">T</td>
+<td align="center">T</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td align="center">T</td>
+<td align="center">F</td>
+<td align="center">T</td>
+<td align="center">T</td>
+</tr>
+</tbody></table>
+<p>对于四种等价关系，同样可以列出真值表证明。除了真值表之外，利用其等价于not p or r，还可以从数学上推导证明。对于两个或多个并集的规则集，我们称之为union rule configuration(URC)。</p>
+<p>URC有一个潜在的问题在于直观上人们不能很好地判断最终的结果（但我感觉一直挺直观的，怕不是我哪里理解有问题。。。）</p>
+<h2 id="URC如何作用于模糊推理系统"><a href="#URC如何作用于模糊推理系统" class="headerlink" title="URC如何作用于模糊推理系统"></a>URC如何作用于模糊推理系统</h2><p>还是以前一篇文章的武器选择系统为例。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>近距离</th>
+<th>中等距离</th>
+<th>远距离</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>子弹少</td>
+<td>不期望（0）</td>
+<td><strong>期望（0.2）</strong></td>
+<td><strong>不期望（0.2）</strong></td>
+</tr>
+<tr>
+<td>子弹中等</td>
+<td>不期望（0）</td>
+<td><strong>非常期望（0.67）</strong></td>
+<td><strong>不期望（0.33）</strong></td>
+</tr>
+<tr>
+<td>子弹多</td>
+<td>不期望（0）</td>
+<td>非常期望（0）</td>
+<td>期望（0）</td>
+</tr>
+</tbody></table>
+<p>这是我们的IRC矩阵。如果变为URC，我们就要单独为一个模糊语言变量的成员设定相应的关系，因为if p then r。这里有两个条件模糊成员变量。</p>
+<table>
+<thead>
+<tr>
+<th>Ammo</th>
+<th>AmmoLow then Undesirable</th>
+<th>AmmoOk then Desirable</th>
+<th>AmmoMore then VeryDesirable</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Distance</td>
+<td>Close then Undesirable</td>
+<td>Medium then VeryDesirable</td>
+<td>Far then Undesirable</td>
+</tr>
+</tbody></table>
+<p>这个就是URC的矩阵。可以看出它比起IRC矩阵少了相当多的维度。至于后续的计算就是处理多个置信度的问题了。</p>
+<p>有时候我们会遇到某个模糊变量成员过多的问题，这时我们就需要调整隶属函数来让每个模糊语言变量的成员数目一致。</p>
+<p>作者在论文提到条件模糊语言变量和后果模糊语言变量应该是具有单调性的线性关系，但我觉得没必要。此时成员数目不一致的问题也得以解决。但是！此时会有一个比较严重的问题——当你在调整优化的时候，后果模糊语言变量去模糊化的结果可能不会是连续变化的。这在有些时候是不符合直觉的，也会出大问题。因为此时在URC矩阵中，后果的不同成员权重实际是不一致的。</p>
+<p>比如上述的URC矩阵中，Desirable只有一处，而Undesirable却有三处。Desirable成员就完全不会受到Distance的影响。可能URC的难以直观理解就体现在这里。</p>
+<p>但我总觉得哪里不对，觉得将IRC的模糊语言变量直接应用于URC有什么大问题。直到我看到了作者在论文中写的这句话</p>
+<blockquote>
+<p>Please understand that we are NOT advocating the transformation of existing rules from one format to another. Instead, we are suggesting that the problem space be modeled using a different rule configuration (URC) than the one normally used (IRC).</p>
+</blockquote>
+<p>所以当我们采用URC时，还是得重新审视一下模糊语言变量。</p>
+<h2 id="带权重的URC"><a href="#带权重的URC" class="headerlink" title="带权重的URC"></a>带权重的URC</h2><p>下面看一个作者论文中的例子。</p>
+<p>模糊语言变量：</p>
+<ol>
+<li><p>Temperature (COLD, COOL and WARM)</p>
+</li>
+<li><p>Rate of Temperature Change (DECREASING, STEADY and INCREASING)</p>
+</li>
+<li><p>Furnace Output (LOW, MODERATELY LOW, MODERATE, MODERATELY HIGH and HIGH)</p>
+</li>
+</ol>
+<p>规则矩阵：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Temp/Rate</strong></th>
+<th align="center"><strong>Cold</strong></th>
+<th align="center"><strong>Cool</strong></th>
+<th align="center"><strong>Warm</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>Decreasing</strong></td>
+<td align="center">High</td>
+<td align="center">Mod. High</td>
+<td align="center">Moderate</td>
+</tr>
+<tr>
+<td align="center"><strong>Steady</strong></td>
+<td align="center">Mod. High</td>
+<td align="center">Moderate</td>
+<td align="center">Mod. Low</td>
+</tr>
+<tr>
+<td align="center"><strong>Increasing</strong></td>
+<td align="center">Moderate</td>
+<td align="center">Mod. Low</td>
+<td align="center">Low</td>
+</tr>
+</tbody></table>
+<p>我们可以看到，当温度处于Cold，同时温度变化速率处于Steady时，此时炉子仍不会处于最大功率；当温度处于相当高，同时温度变化速率也处于Steady时，炉子仍然不会过分降低功率。这些都是我们所不需要的。我们希望在Steady时，Cold下炉子输出为High，Warm下输出为Low，Cool下输出为Moderate。为此我们需要把这个矩阵做一个修改：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Temp/Rate</strong></th>
+<th align="center"><strong>Cold</strong></th>
+<th align="center"><strong>Cool</strong></th>
+<th align="center"><strong>Warm</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>Decreasing</strong></td>
+<td align="center">High(1)</td>
+<td align="center">Mod. High(4)</td>
+<td align="center">Moderate(7)</td>
+</tr>
+<tr>
+<td align="center"><strong>Steady</strong></td>
+<td align="center">High(2)</td>
+<td align="center">Moderate(5)</td>
+<td align="center">Low(8)</td>
+</tr>
+<tr>
+<td align="center"><strong>Increasing</strong></td>
+<td align="center">Moderate(3)</td>
+<td align="center">Mod. Low(6)</td>
+<td align="center">Low(9)</td>
+</tr>
+</tbody></table>
+<p>修改后的矩阵也有一些问题，从规则2到规则3、规则2到规则5、规则5到规则8和规则7到规则8都经历了突变的过程。其次，在这个规则矩阵里规则1和规则2相同、规则8和规则9相同，意味着我们可以去除Steady以缩减规则数目。但是这时候如果温度变化速度刚好等于Steady的话，就没有任何规则会生效，同样会导致输出曲线的不平滑。</p>
+<p>那如果是一个URC矩阵呢？</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Temperature</strong></th>
+<th align="center">1.0</th>
+<th align="center">Cold Then High</th>
+<th align="center">1.0</th>
+<th align="center">Cool Then Moderate</th>
+<th align="center">1.0</th>
+<th align="center">Warm Then Low</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>Rate</strong></td>
+<td align="center">1.0</td>
+<td align="center">Decreasing Then High</td>
+<td align="center">0.0</td>
+<td align="center">Steady Then Moderate</td>
+<td align="center">1.0</td>
+<td align="center">Increasing Then Low</td>
+</tr>
+</tbody></table>
+<p>这样，通过给规则增加一个权重，我们就能在Steady时，仅考虑温度的影响。比起URC要简单得多。</p>
+<h2 id="武器选择系统中URC与IRC的比较"><a href="#武器选择系统中URC与IRC的比较" class="headerlink" title="武器选择系统中URC与IRC的比较"></a>武器选择系统中URC与IRC的比较</h2><p>回顾上一篇文章，我们用IRC规则得到了期望值，分别是最大值平均方法的60.42和中心法的62。这里用前文描述的URC也做了一个计算，最大值平均法得到的结果是56.94，中心法得到的结果是59.41。</p>
+<p>而当我把Distance的Far then Undesirable改成Far then Desirable时，最大值平均法得到的结果是60.5，中心法得到的结果是62.34。这和IRC相比更为接近。当然我没有做大范围的测试，因为太晚了，要睡觉了。等我有空了再把之前写的模块更新一下发上来。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] <a href="http://athena.ecs.csus.edu/~hellerm/EEE222/Atricles/Combs_Fuzzy_Logic/Combs_Rapid_Inference.htm" target="_blank" rel="noopener">http://athena.ecs.csus.edu/~hellerm/EEE222/Atricles/Combs_Fuzzy_Logic/Combs_Rapid_Inference.htm</a> （这是Combs的论文，挺简单的，也很详细）</p>
+<p>[2] <a href="https://en.wikipedia.org/wiki/Combs_method" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Combs_method</a></p>
+</div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>零度</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://lingdu-zero.github.io/posts/a6e9e1d4ad4a07ee.html" title="模糊逻辑续篇——CombsMethod">https://lingdu-zero.github.io/posts/a6e9e1d4ad4a07ee.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/32bfd856e49525fazh.html" rel="next" title="模糊逻辑"><span class="post-nav-text">模糊逻辑</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div id="comment"><div class="comment-tooltip text-center"><span>点击按钮跳转 GitHub Issues 评论。</span><br><span>若没有本文 Issue，您可以使用 Comment 模版新建。</span><br><a class="hty-button hty-button--raised" id="github-issues" href="https://github.com/LingDu-zero/lingdu-zero.github.io/issues?q=is:issue+模糊逻辑续篇——CombsMethod" target="_blank" rel="noopener">GitHub Issues</a></div><div class="comment-container" id="valine-container"></div><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script>function initValine() {
+  setTimeout(() => {
+    new Valine({
+      el: "#valine-container",
+      appId: 'Pnajuj8AVCnpjUJSXoPrHWC0-gzGzoHsz',
+      appKey: '16IhzbRUvBsl4UEdd6R5f3ER',
+      placeholder: 'Just go go',
+      path: window.location.pathname,
+      avatar: '',
+      meta: ["nick","mail","link"],
+      pageSize: 10,
+      lang: 'zh-cn',
+      visitor: false,
+      highlight: true,
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: null,
+      enableQQ: true,
+      requiredFields: [],
+    });
+  }, 1000);
+}
+initValine();</script></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2020 – 2021 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> LingDu</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v4.2.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v0.7.1</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  window.setTimeout(blog_live_time, 1000);
+  const start = new Date('2020-05-17T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div></footer><a class="hty-icon-button" id="goUp" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#9856A1" stroke-width="2" stroke-linecap="round"></circle></svg></a></div><script defer src="/js/hexo-theme-yun.js"></script></body></html>
